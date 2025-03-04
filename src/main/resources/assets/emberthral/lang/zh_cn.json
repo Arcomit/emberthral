@@ -1,0 +1,11 @@
+{
+  "filter.negorerouse.test": "§a测试",
+  "filter.negorerouse.test2": "§b测试2",
+  "filter.negorerouse.test3": "§o测试3",
+  "filter.negorerouse.test4": "§3测试4",
+  "filter.negorerouse.test5": "§4测试5",
+
+  "filter.negorerouse.tips.shift": "§e单选-按住 §l§6Shift §e键时",
+  "filter.negorerouse.tips.ctrl": "§e全选-按住 §l§6Ctrl §e键时",
+  "filter.negorerouse.tips.alt": "§e反选-按住 §l§6Alt §e键时"
+}

@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "mod.arcomit.emberthral.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "emberthral.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "CreativeInventoryMixin",
+    "ICreativeInventoryMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
