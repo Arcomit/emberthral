@@ -1,7 +1,6 @@
 package mod.arcomit.emberthral.client.creativefilter;
 
 import mod.arcomit.emberthral.mixin.ICreativeInventoryMixin;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -9,7 +8,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 
 // 过滤管理器

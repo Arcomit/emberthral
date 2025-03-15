@@ -3,7 +3,6 @@ package mod.arcomit.emberthral.client.event.filter;
 import mod.arcomit.emberthral.client.creativefilter.Filter;
 import mod.arcomit.emberthral.client.creativefilter.FilterManager;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.extensions.IForgeBakedModel;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

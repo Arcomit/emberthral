@@ -3,7 +3,6 @@ package mod.arcomit.emberthral.client.gui.filter;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.arcomit.emberthral.client.creativefilter.FilterManager;
 import mod.arcomit.emberthral.mixin.ICreativeInventoryMixin;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;

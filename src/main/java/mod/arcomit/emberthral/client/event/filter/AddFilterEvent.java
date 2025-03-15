@@ -6,7 +6,6 @@ import mod.arcomit.emberthral.client.gui.filter.PageButton;
 import mod.arcomit.emberthral.mixin.ICreativeInventoryMixin;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
