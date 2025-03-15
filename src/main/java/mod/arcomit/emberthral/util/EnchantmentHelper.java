@@ -13,7 +13,7 @@ public class EnchantmentHelper {
                 Enchantment enchantment1 = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(enchantments.split(";")[0]));
                 Enchantment enchantment2 = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(enchantments.split(";")[1]));
                 if (enchantment1 == null || enchantment2 == null) continue;
-                if (enchantment1.equals(arg) && enchantment2.equals(instance)) {
+                if (enchantment1.equals(arg) && enchantment2.equals(instance) || enchantment2.equals(arg) && enchantment1.equals(instance)) {
                     checkCompat = true;
                     break;
                 }
@@ -23,7 +23,7 @@ public class EnchantmentHelper {
                 Enchantment enchantment1 = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(enchantments.split(";")[0]));
                 Enchantment enchantment2 = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(enchantments.split(";")[1]));
                 if (enchantment1 == null || enchantment2 == null) continue;
-                if (enchantment1.equals(arg) && enchantment2.equals(instance)) {
+                if (enchantment1.equals(arg) && enchantment2.equals(instance) || enchantment2.equals(arg) && enchantment1.equals(instance)) {
                     checkCompat = false;
                     break;
                 }
