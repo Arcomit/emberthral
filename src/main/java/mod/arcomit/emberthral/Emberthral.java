@@ -5,7 +5,9 @@ import mod.arcomit.emberthral.client.creativefilter.Filter;
 import mod.arcomit.emberthral.client.creativefilter.FilterManager;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
@@ -13,10 +15,11 @@ import org.slf4j.Logger;
 public class Emberthral {
 
     public static final String MODID = "emberthral";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public Emberthral() {
         LOGGER.info("Emberthral is loaded!");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         //示例-仅在开发环境生效
         if (!FMLEnvironment.production) {
             Filter test = new Filter("test",new ItemStack(Items.IRON_INGOT));

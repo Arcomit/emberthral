@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "emberthral.refmap.json",
   "mixins": [
+    "EnchantmentMixin"
   ],
   "client": [
     "CreativeInventoryMixin",
