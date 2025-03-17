@@ -13,6 +13,5 @@ public abstract class EnchantmentMixin {
     @Inject(method = "isCompatibleWith", at = @At("RETURN"), cancellable = true)
     private void onCheckCompat(Enchantment arg, @NotNull CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(EnchantmentHelper.isCompat((Enchantment) (Object)this, arg, cir.getReturnValue()));
-        cir.cancel();
     }
 }
