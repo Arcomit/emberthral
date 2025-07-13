@@ -1,76 +1,73 @@
-package mod.arcomit.emberthral.client.gui.filter;
+package mod.arcomit.emberthral.client.filter.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import mod.arcomit.emberthral.client.creativefilter.Filter;
-import mod.arcomit.emberthral.client.creativefilter.FilterManager;
-import mod.arcomit.emberthral.mixin.ICreativeInventoryMixin;
+
+import mod.arcomit.emberthral.client.filter.Filter;
+import mod.arcomit.emberthral.client.filter.FilterManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
+// 过滤器按钮
 public class FilterButton extends Button {
+
+    // 其实是顺序，0-3，对应4个按钮
     private final int ID;
     // 当前按钮对应的过滤器
-    private Filter currentFilter = null;
+    private Filter currentFilter;
+    // 按钮贴图
     private static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation("textures/gui/slider.png");
-    private static boolean needRefresh = false;
 
-    public FilterButton(int x, int y, int width, int height, int buttonID) {
-        super(x, y, width, height, Component.empty(), button -> {}, DEFAULT_NARRATION);
+    public FilterButton(int width, int height, int buttonID) {
+        super(0, 0, width, height, Component.empty(), button -> {
+        }, DEFAULT_NARRATION);
         this.ID = buttonID;
     }
 
     @Override
     public void onPress() {
         //按下后切换过滤器状态
-        if (currentFilter != null){
+        boolean shift = Screen.hasShiftDown();
+        boolean ctrl = Screen.hasControlDown();
+        boolean alt = Screen.hasAltDown();
+
+        LinkedHashSet<Filter> filters = FilterManager.filterTabMap.get(CreativeModeInventoryScreen.selectedTab);
+        if (shift) {
+            filters.forEach(filter -> filter.setSwitch(filter == this.currentFilter));
+        } else if (ctrl) {
+            this.currentFilter.toggleState();
+            filters.stream().filter(filter -> filter != this.currentFilter).forEach(filter -> filter.setSwitch(this.currentFilter.isEnable()));
+        } else if (alt) {
+            filters.forEach(filter -> filter.setSwitch(!filter.isEnable()));
+        } else {
             currentFilter.toggleState();
         }
+
+        FilterManager.refreshesCurrentItems();
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        if (needRefresh){
-            refreshFilter();
-        }
+        Minecraft minecraft = Minecraft.getInstance();
+        int leftPos = (minecraft.getWindow().getGuiScaledWidth() - 195) / 2;
+        int topPos = (minecraft.getWindow().getGuiScaledHeight() - 136) / 2;
+        this.x = leftPos - 22;
+        this.y = topPos + 9 + (ID * 29);
 
-        boolean shouldHide = (currentFilter == null) || !FilterManager.tabRequiresFilter(ICreativeInventoryMixin.getSelectedTab());
-        this.visible = !shouldHide;
-        if(!this.visible) return;
+        this.visible = currentFilter != null && FilterManager.isNeedsToBeFiltered(CreativeModeInventoryScreen.selectedTab);
 
         super.render(guiGraphics, mouseX, mouseY, partialTick);
     }
-
-    // 刷新，用于更新当前对应的过滤器
-    public void refreshFilter(){
-        CreativeModeTab currentTab = ICreativeInventoryMixin.getSelectedTab();
-        this.currentFilter = safeGet(FilterManager.getFiltersForTab(currentTab), (PageButton.PAGE_STATE.getCurrentPage() - 1) * 4 + ID);
-        if (ID == 3) {
-            needRefresh = false;
-        }//如果刷新到最后一个按钮，则停止本轮刷新
-    }
-
-    // 如果列表为空、索引越界，返回 null
-    public static <T> T safeGet(List<T> list, int index) {
-        if (list == null || index < 0 || index >= list.size()) {
-            return null;
-        }
-        return list.get(index);
-    }
-
-    // 刷新所有过滤器按钮
-    public static void refreshAllButtonFilters(){
-        needRefresh = true;
-    }
-
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
@@ -80,8 +77,7 @@ public class FilterButton extends Button {
         renderBackgroud(guiGraphics);
 
         // 别动这行，这行是玄学代码，没它会出现文字渲染黑色的问题
-        int i = getFGColor();
-        this.renderString(guiGraphics, Minecraft.getInstance().font, i | Mth.ceil(this.alpha * 255.0F) << 24);
+        this.renderString(guiGraphics, Minecraft.getInstance().font, this.getFGColor() | Mth.ceil(this.alpha * 255.0F) << 24);
 
         // 渲染物品图标(含阴影)
         renderItemWithShadow(guiGraphics);
@@ -106,6 +102,7 @@ public class FilterButton extends Button {
                 0, getTextureY(isHovered)
         );
     }
+
     //0-1按下，2-3未按下。
     private int getTextureY(boolean isHovered) {
         return (currentFilter.isEnable()
@@ -128,20 +125,21 @@ public class FilterButton extends Button {
     }
 
     private static final List<Component> tooltip = new ArrayList<>();
+
     private void renderTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         Minecraft minecraft = Minecraft.getInstance();
 
-        tooltip.add(Component.translatable("filter.negorerouse." + currentFilter.getName()));
+        tooltip.add(Component.translatable("filter." + currentFilter.getName()));
         boolean shift = Screen.hasShiftDown();
         boolean ctrl = Screen.hasControlDown();
         boolean alt = Screen.hasAltDown();
 
         if (shift) {
-            tooltip.add(Component.translatable("filter.negorerouse.tips.shift"));
+            tooltip.add(Component.translatable("filter.emberthral.tips.shift"));
         } else if (ctrl) {
-            tooltip.add(Component.translatable("filter.negorerouse.tips.ctrl"));
+            tooltip.add(Component.translatable("filter.emberthral.tips.ctrl"));
         } else if (alt) {
-            tooltip.add(Component.translatable("filter.negorerouse.tips.alt"));
+            tooltip.add(Component.translatable("filter.emberthral.tips.alt"));
         }
 
         guiGraphics.renderComponentTooltip(minecraft.font,
@@ -149,5 +147,23 @@ public class FilterButton extends Button {
                 mouseX, mouseY);
         tooltip.clear();
     }
+
+    public void refreshFilter() {
+        LinkedHashSet<Filter> filters = FilterManager.filterTabMap.getOrDefault(CreativeModeInventoryScreen.selectedTab, null);
+        this.currentFilter = safeGet(filters, (PageButton.PAGE_STATE.getCurrentPage() - 1) * 4 + ID);
+    }
+
+    public static Filter safeGet(LinkedHashSet<Filter> filter, int index) {
+        if (filter == null) return null;
+        List<Filter> list = new ArrayList<>(filter);
+        if (index < 0 || index >= list.size()) return null;
+        return list.get(index);
+    }
+
+//—————————————————————————实例—————————————————————————//
+        public static FilterButton INSTANCE_0 = new FilterButton(20, 20, 0);
+        public static FilterButton INSTANCE_1 = new FilterButton(20, 20, 1);
+        public static FilterButton INSTANCE_2 = new FilterButton(20, 20, 2);
+        public static FilterButton INSTANCE_3 = new FilterButton(20, 20, 3);
 
 }

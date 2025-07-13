@@ -20,7 +20,6 @@ public class Config {
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ALWAYS_INCOMPATIBLE;
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ALWAYS_COMPATIBLE;
 
-
     static final ForgeConfigSpec SPEC;
 
     static {

@@ -8,8 +8,7 @@
     "EnchantmentMixin"
   ],
   "client": [
-    "CreativeInventoryMixin",
-    "ICreativeInventoryMixin"
+    "CreativeInventoryMixin"
   ],
   "injectors": {
     "defaultRequire": 1
