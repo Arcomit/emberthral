@@ -34,8 +34,8 @@ public class EnchantmentHelper {
                 Emberthral.LOGGER.warn("Invalid enchantment pair format: {}", pairStr);
                 continue;
             }
-            Enchantment e1 = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(parts[0]));
-            Enchantment e2 = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(parts[1]));
+            Enchantment e1 = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.parse(parts[0]));
+            Enchantment e2 = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.parse(parts[1]));
             if (e1 == null || e2 == null) {
                 Emberthral.LOGGER.warn("Enchantment not found in pair: {}", pairStr);
                 continue;

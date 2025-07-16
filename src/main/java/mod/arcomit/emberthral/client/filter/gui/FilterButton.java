@@ -26,7 +26,7 @@ public class FilterButton extends Button {
     // 当前按钮对应的过滤器
     private Filter currentFilter;
     // 按钮贴图
-    private static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation("textures/gui/slider.png");
+    private static final ResourceLocation BUTTON_TEXTURE = ResourceLocation.parse("textures/gui/slider.png");
 
     public FilterButton(int width, int height, int buttonID) {
         super(0, 0, width, height, Component.empty(), button -> {

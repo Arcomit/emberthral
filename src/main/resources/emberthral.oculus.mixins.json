@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "mod.arcomit.emberthral.oculus.mixin",
+  "plugin": "mod.arcomit.emberthral.oculus.mixin.MixinPluginOculus",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "emberthral.refmap.json",
+  "mixins": [],
+  "client": [
+    "MixinParticleEngineA",
+    "MixinParticleEngineB"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

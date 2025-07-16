@@ -2,13 +2,16 @@
   "required": true,
   "minVersion": "0.8",
   "package": "mod.arcomit.emberthral.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "emberthral.refmap.json",
   "mixins": [
     "EnchantmentMixin"
   ],
   "client": [
-    "CreativeInventoryMixin"
+    "CreativeInventoryMixin",
+    "MixinGameRenderer",
+    "MixinLevelRenderer",
+    "MixinParticleEngine"
   ],
   "injectors": {
     "defaultRequire": 1

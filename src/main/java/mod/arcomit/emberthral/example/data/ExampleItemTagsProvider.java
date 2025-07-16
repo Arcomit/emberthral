@@ -1,10 +1,9 @@
-package mod.arcomit.emberthral.data.example;
+package mod.arcomit.emberthral.example.data;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -24,7 +23,7 @@ public class ExampleItemTagsProvider extends ItemTagsProvider {
 
         tag(ExampleTags.Items.EXAMPLE_ITEM_TAG)
                 .add(Blocks.SPAWNER.asItem()) // 添加方块物品(添加物品同理)
-                .addOptional(new ResourceLocation("nb", "666")); // 添加其它模组物品(无需依赖该模组);
+                .addOptional(ResourceLocation.fromNamespaceAndPath("nb", "666")); // 添加其它模组物品(无需依赖该模组);
 
         // 添加所有生成蛋物品
         ForgeRegistries.ITEMS.getValues().stream()

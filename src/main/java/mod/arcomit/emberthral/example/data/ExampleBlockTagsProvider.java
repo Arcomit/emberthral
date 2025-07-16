@@ -1,4 +1,4 @@
-package mod.arcomit.emberthral.data.example;
+package mod.arcomit.emberthral.example.data;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

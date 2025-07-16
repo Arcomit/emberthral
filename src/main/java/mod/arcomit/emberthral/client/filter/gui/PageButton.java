@@ -16,7 +16,7 @@ import java.util.Map;
 
 //翻页按钮
 public class PageButton extends Button {
-    public static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation("textures/gui/resource_packs.png");
+    public static final ResourceLocation BUTTON_TEXTURE = ResourceLocation.parse("textures/gui/resource_packs.png");
 
     private final boolean isDown;
     public static final PageState PAGE_STATE = new PageState();

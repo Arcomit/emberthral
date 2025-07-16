@@ -1,22 +1,16 @@
-package mod.arcomit.emberthral.data;
+package mod.arcomit.emberthral.example.data;
 
 import mod.arcomit.emberthral.Emberthral;
 import mod.arcomit.emberthral.client.filter.Filter;
-import mod.arcomit.emberthral.data.example.ExampleBlockTagsProvider;
-import mod.arcomit.emberthral.data.example.ExampleItemTagsProvider;
-import mod.arcomit.emberthral.data.example.ExampleTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.ForgeBlockTagsProvider;
-import net.minecraftforge.common.data.ForgeItemTagsProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

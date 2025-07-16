@@ -1,4 +1,4 @@
-package mod.arcomit.emberthral.util;
+package mod.arcomit.emberthral.randomizedalgorithm;
 
 import java.util.Random;
 

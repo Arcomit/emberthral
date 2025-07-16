@@ -1,4 +1,4 @@
-package mod.arcomit.emberthral.data.example;
+package mod.arcomit.emberthral.example.data;
 
 import mod.arcomit.emberthral.Emberthral;
 import net.minecraft.tags.TagKey;
