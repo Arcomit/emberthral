@@ -23,7 +23,7 @@ public abstract class MixinLevelRenderer {
 
             ))
     private void markRendered(CallbackInfo cbi){
-        PostEffectPipelines.active();
+        //PostEffectPipelines.active();
     }
 
 

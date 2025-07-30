@@ -16,10 +16,7 @@ import java.util.Queue;
 import java.util.Set;
 
 
-//*
-/***
- * For Oculus Compat
- */
+// 兼容Oculus
 @SuppressWarnings("InvalidMemberReference" )
 @Mixin(value = ParticleEngine.class, priority = 1500)
 public abstract class MixinParticleEngineB {

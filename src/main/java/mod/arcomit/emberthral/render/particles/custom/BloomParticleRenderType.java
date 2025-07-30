@@ -156,6 +156,7 @@ public class BloomParticleRenderType extends PostParticleRenderType {
          */
         @Override
         public void PostEffectHandler() {
+            doDepthCull(bufferTarget,PostEffectPipelines.depth);
             initTargets();       // 初始化/调整渲染目标
             handlePasses(bufferTarget); // 执行模糊处理流程
         }

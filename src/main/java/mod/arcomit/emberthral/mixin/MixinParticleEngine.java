@@ -31,91 +31,90 @@ import java.util.*;
 
 import java.util.*;
 
-//*
+//
 @Mixin(ParticleEngine.class)
 public abstract class MixinParticleEngine {
 
-    @Shadow
-    @Final
-    private Map<ParticleRenderType, Queue<Particle>> particles;
-
-    @Shadow
-    @Final
-    private TextureManager textureManager;
-
-    @Unique
-    private final PriorityQueue<ParticleEngineHelper.PostParticles> epicacg$renderQueue = ParticleEngineHelper.createQueue();
-
-    @Inject(
-            method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;Lnet/minecraft/client/renderer/LightTexture;Lnet/minecraft/client/Camera;FLnet/minecraft/client/renderer/culling/Frustum;)V",
-            at = @At(value = "TAIL" ),
-            remap = false
-    )
-    private void injectRenderPost(PoseStack posestack_, MultiBufferSource.BufferSource bufferSource, LightTexture lightTexture, Camera camera, float p_107341_, Frustum clippingHelper, CallbackInfo ci){
-        if(!PostEffectPipelines.isActive()) return;
-
-        //System.out.println("PostParticle Batch");
-
-        lightTexture.turnOnLightLayer();
-        RenderSystem.enableDepthTest();
-        RenderSystem.activeTexture(33986);
-        RenderSystem.activeTexture(33984);
-        PoseStack posestack = RenderSystem.getModelViewStack();
-        posestack.pushPose();
-        posestack.mulPoseMatrix(posestack_.last().pose());
-        RenderSystem.applyModelViewMatrix();
-
-        epicacg$renderQueue.clear();
-        Iterator<?> rendertypes = particles.keySet().iterator();
-        while (rendertypes.hasNext()){
-            if(rendertypes.next() instanceof PostParticleRenderType pprt){
-                epicacg$renderQueue.add(new ParticleEngineHelper.PostParticles(pprt, particles.get(pprt)));
-            }
-        }
-
-        ParticleEngineHelper.PostParticles queueItem;
-        PostParticleRenderType particlerendertype;
-        while (!epicacg$renderQueue.isEmpty()) {
-            queueItem = epicacg$renderQueue.poll();
-            particlerendertype = queueItem.rt();
-
-            //System.out.println("Now Render:"+particlerendertype.getClass().getName());
-
-            RenderSystem.setShader(GameRenderer::getParticleShader);
-            Tesselator tesselator = Tesselator.getInstance();
-            BufferBuilder bufferbuilder = tesselator.getBuilder();
-            particlerendertype.begin(bufferbuilder, textureManager);
-            var particleIterator = queueItem.particles().iterator();
-
-            Particle particle;
-            while (particleIterator.hasNext()) {
-                particle = particleIterator.next();
-                if (clippingHelper == null
-                        || !particle.shouldCull()
-                        || clippingHelper.isVisible(particle.getBoundingBox())) {
-                    try {
-                        particlerendertype.callPipeline();
-                        particle.render(bufferbuilder, camera, p_107341_);
-                    } catch (Throwable var18) {
-                        CrashReport crashreport = CrashReport.forThrowable(var18, "Rendering Particle" );
-                        CrashReportCategory crashreportcategory = crashreport.addCategory("Particle being rendered" );
-                        Objects.requireNonNull(particle);
-                        crashreportcategory.setDetail("Particle", particle::toString);
-                        Objects.requireNonNull(particlerendertype);
-                        crashreportcategory.setDetail("Particle Type", particlerendertype::toString);
-                        throw new ReportedException(crashreport);
-                    }
-                }
-            }
-            particlerendertype.end(tesselator);
-        }
-
-        posestack.popPose();
-        RenderSystem.applyModelViewMatrix();
-        RenderSystem.depthMask(true);
-        RenderSystem.disableBlend();
-        lightTexture.turnOffLightLayer();
-    }
+//    @Shadow
+//    @Final
+//    private Map<ParticleRenderType, Queue<Particle>> particles;
+//
+//    @Shadow
+//    @Final
+//    private TextureManager textureManager;
+//
+//    @Unique
+//    private final PriorityQueue<ParticleEngineHelper.PostParticles> emberthral$renderQueue = ParticleEngineHelper.createQueue();
+//
+//    @Inject(
+//            method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;Lnet/minecraft/client/renderer/LightTexture;Lnet/minecraft/client/Camera;FLnet/minecraft/client/renderer/culling/Frustum;)V",
+//            at = @At(value = "TAIL" ),
+//            remap = false
+//    )
+//    private void injectRenderPost(PoseStack posestack_, MultiBufferSource.BufferSource bufferSource, LightTexture lightTexture, Camera camera, float pPartialTick, Frustum clippingHelper, CallbackInfo ci){
+//        if(!PostEffectPipelines.isActive()) return;
+//
+//        // 添加我们的粒子渲染批次
+//        lightTexture.turnOnLightLayer();
+//        RenderSystem.enableDepthTest();
+//        RenderSystem.activeTexture(org.lwjgl.opengl.GL13.GL_TEXTURE2);
+//        RenderSystem.activeTexture(org.lwjgl.opengl.GL13.GL_TEXTURE0);
+//        PoseStack posestack = RenderSystem.getModelViewStack();
+//        posestack.pushPose();
+//        posestack.mulPoseMatrix(posestack_.last().pose());
+//        RenderSystem.applyModelViewMatrix();
+//
+//        emberthral$renderQueue.clear();
+//        Iterator<?> rendertypes = particles.keySet().iterator();
+//        while (rendertypes.hasNext()){
+//            if(rendertypes.next() instanceof PostParticleRenderType pprt){
+//                emberthral$renderQueue.add(new ParticleEngineHelper.PostParticles(pprt, particles.get(pprt)));
+//            }
+//        }
+//
+//        ParticleEngineHelper.PostParticles queueItem;
+//        PostParticleRenderType particlerendertype;
+//        while (!emberthral$renderQueue.isEmpty()) {
+//            queueItem = emberthral$renderQueue.poll();
+//            particlerendertype = queueItem.rt();
+//
+//            //System.out.println("Now Render:"+particlerendertype.getClass().getName());
+//
+//            RenderSystem.setShader(GameRenderer::getParticleShader);
+//            Tesselator tesselator = Tesselator.getInstance();
+//            BufferBuilder bufferbuilder = tesselator.getBuilder();
+//            particlerendertype.begin(bufferbuilder, textureManager);
+//            var particleIterator = queueItem.particles().iterator();
+//
+//            Particle particle;
+//            while (particleIterator.hasNext()) {
+//                particle = particleIterator.next();
+//                if (clippingHelper == null
+//                        || !particle.shouldCull()
+//                        || clippingHelper.isVisible(particle.getBoundingBox())) {
+//                    try {
+//                        particlerendertype.callPipeline();
+//                        particle.render(bufferbuilder, camera, pPartialTick);
+//                    } catch (Throwable var18) {
+//                        CrashReport crashreport = CrashReport.forThrowable(var18, "Rendering Particle" );
+//                        CrashReportCategory crashreportcategory = crashreport.addCategory("Particle being rendered" );
+//                        Objects.requireNonNull(particle);
+//                        crashreportcategory.setDetail("Particle", particle::toString);
+//                        Objects.requireNonNull(particlerendertype);
+//                        crashreportcategory.setDetail("Particle Type", particlerendertype::toString);
+//                        throw new ReportedException(crashreport);
+//                    }
+//                }
+//            }
+//            particlerendertype.end(tesselator);
+//        }
+//
+//        posestack.popPose();
+//        RenderSystem.applyModelViewMatrix();
+//        RenderSystem.depthMask(true);
+//        RenderSystem.disableBlend();
+//        lightTexture.turnOffLightLayer();
+//    }
 
 
 

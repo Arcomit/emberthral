@@ -1,0 +1,9 @@
+{
+  "beFilteredTabId": "minecraft:ingredients",
+  "filterTagKey": "forge:eggs",
+  "icon": {
+    "Count": 1,
+    "id": "minecraft:egg"
+  },
+  "name": "emberthral.egg"
+}

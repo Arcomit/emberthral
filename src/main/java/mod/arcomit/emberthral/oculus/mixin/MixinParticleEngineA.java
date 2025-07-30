@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-//*
+// 不要让原版粒子引擎渲染我们
 @Mixin(ParticleEngine.class)
 public abstract class MixinParticleEngineA {
     @Redirect(

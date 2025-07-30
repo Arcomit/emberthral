@@ -19,7 +19,7 @@ public abstract class MixinGameRenderer {
                     ordinal = 0
             ))
     private void PostRender(float pt, long startTime, boolean tick, CallbackInfo cbi){
-        PostEffectPipelines.RenderPost();
+        //PostEffectPipelines.RenderPost();
     }
 
 }

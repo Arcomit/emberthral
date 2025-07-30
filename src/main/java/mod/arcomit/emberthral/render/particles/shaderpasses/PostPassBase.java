@@ -108,7 +108,9 @@ public class PostPassBase {
      */
     public void pushVertex(RenderTarget inTarget, RenderTarget outTarget) {
         // 准备输出目标
-        outTarget.clear(Minecraft.ON_OSX);  // 清除缓冲区
+        if (outTarget != Minecraft.getInstance().getMainRenderTarget()){
+            outTarget.clear(Minecraft.ON_OSX);  // 清除缓冲区
+        }
         outTarget.bindWrite(false);         // 绑定为写入目标
 
         // 配置深度测试（总是通过）

@@ -146,9 +146,11 @@ public abstract class PostParticleRenderType implements ParticleRenderType {
         // 获取临时渲染目标
         RenderTarget tmp = TargetManager.getTarget(tempTarget);
         // 第一步：将源目标复制到临时目标
-        PostPasses.blit.process(source, tmp);
+//        PostPasses.blit.process(source, tmp);
+//        source.clear(ON_OSX);
         // 第二步：应用深度剔除处理（使用临时目标和深度缓冲区）
-        PostPasses.depth_cull.process(tmp, DepthBuffer, source);
+        PostPasses.depth_cull.process(source, DepthBuffer, tmp);
+        PostPasses.blit.process(tmp,source);
         // 释放临时目标
         TargetManager.ReleaseTarget(tempTarget);
     }
