@@ -1,10 +1,10 @@
 {
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/emberthral",
   "1.21.1": {
-    "1.0.0": "Officially release the first version."
+    "1.0.0-neoforge+mc1.21.1": "Officially release the first version."
   },
   "promos": {
-    "1.21.1-latest": "1.0.0",
-    "1.21.1-recommended": "1.0.0"
+    "1.21.1-latest": "1.0.0-neoforge+mc1.21.1",
+    "1.21.1-recommended": "1.0.0-neoforge+mc1.21.1"
   }
 }

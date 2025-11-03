@@ -10,7 +10,7 @@ displayName = "${mod_name}"
 updateJSONURL="https://github.com/Arcomit/emberthral/blob/1.21.1/neoforge-update.json"
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/emberthral"
 logoFile="emberthral.png"
-credits="Low-Drag-MC,MCModderAnchor,flammpfeil"
+credits="Low-Drag-MC,MCModderAnchor,Furia"
 authors = "${mod_authors}"
 description = '''${mod_description}'''
 
@@ -23,7 +23,6 @@ config="${mod_id}.core.obj.acceleratedrendering.mixins.json"
 
 [[dependencies."${mod_id}"]]
 modId = "neoforge"
-'required' 要求 mod 存在，'optional' does not 'incompatible' 会阻止游戏在 mod 存在时加载，'discouraged' 会显示警告
 # 依赖项的类型。可以是“必需（required）”、“可选（optional）”、“不兼容（incompatible）”或“不鼓励（discouraged）”（不区分大小写）之一。
 type = "required"
 # 描述依赖项为何为必需或不兼容的可选字段
