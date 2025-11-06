@@ -32,8 +32,7 @@
 src/main/java/mod/arcomit/emberthral/
 ├── content/    # 实际模组内容
 ├── core/       # 底层核心代码
-│   ├── animation/       # 动作资产读取加载
-│   ├── itemrenderer/    # 更简洁的自定义物品渲染
-│   └── obj/             # obj模型资产读取加载
+│   ├── bedrock/         # 基岩版模型动画读取加载渲染
+│   └── obj/             # obj模型读取加载渲染
 └── util/       # 通用工具库
 ```
