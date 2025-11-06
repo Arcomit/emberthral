@@ -5,7 +5,7 @@ import mod.arcomit.emberthral.EmberthralMod;
 import mod.arcomit.emberthral.core.obj.ModelParseException;
 import mod.arcomit.emberthral.core.obj.ObjModel;
 import mod.arcomit.emberthral.core.obj.ObjReader;
-import mod.arcomit.emberthral.utils.DefaultResources;
+import mod.arcomit.emberthral.core.obj.utils.DefaultResources;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.server.packs.resources.Resource;

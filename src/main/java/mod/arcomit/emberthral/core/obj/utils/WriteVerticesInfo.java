@@ -1,4 +1,4 @@
-package mod.arcomit.emberthral.utils;
+package mod.arcomit.emberthral.core.obj.utils;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.Getter;

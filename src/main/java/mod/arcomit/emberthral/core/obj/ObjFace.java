@@ -1,7 +1,7 @@
 package mod.arcomit.emberthral.core.obj;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mod.arcomit.emberthral.utils.WriteVerticesInfo;
+import mod.arcomit.emberthral.core.obj.utils.WriteVerticesInfo;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Matrix3f;

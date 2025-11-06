@@ -1,4 +1,4 @@
-package mod.arcomit.emberthral.utils;
+package mod.arcomit.emberthral.core.obj.utils;
 
 import mod.arcomit.emberthral.EmberthralMod;
 import net.minecraft.resources.ResourceLocation;

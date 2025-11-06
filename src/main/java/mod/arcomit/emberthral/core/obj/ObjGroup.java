@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import lombok.Getter;
 import lombok.Setter;
 import mod.arcomit.emberthral.utils.PoseStackAutoCloser;
-import mod.arcomit.emberthral.utils.WriteVerticesInfo;
+import mod.arcomit.emberthral.core.obj.utils.WriteVerticesInfo;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Quaternionf;

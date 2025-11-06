@@ -14,7 +14,7 @@ import lombok.experimental.ExtensionMethod;
 import mod.arcomit.emberthral.core.obj.ObjFace;
 import mod.arcomit.emberthral.core.obj.ObjGroup;
 import mod.arcomit.emberthral.utils.PoseStackAutoCloser;
-import mod.arcomit.emberthral.utils.WriteVerticesInfo;
+import mod.arcomit.emberthral.core.obj.utils.WriteVerticesInfo;
 import net.minecraft.util.FastColor;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;

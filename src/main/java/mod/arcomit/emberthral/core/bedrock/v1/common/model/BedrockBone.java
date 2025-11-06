@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
+import mod.arcomit.emberthral.utils.PoseStackAutoCloser;
 import net.minecraft.client.renderer.LightTexture;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -62,15 +63,14 @@ public class BedrockBone {
             }
 
             if (!this.cubes.isEmpty() || !this.children.isEmpty()) {
-                poseStack.pushPose();
-                this.translateAndRotateAndScale(poseStack);
-                this.compile(poseStack.last(), consumer, cubePackedLight, overlay, red, green, blue, alpha);
+                try (PoseStackAutoCloser PSAC1 = PoseStackAutoCloser.pushMatrix(poseStack)) {
+                    this.translateAndRotateAndScale(poseStack);
+                    this.compile(poseStack.last(), consumer, cubePackedLight, overlay, red, green, blue, alpha);
 
-                for (BedrockBone part : this.children) {
-                    part.render(poseStack, consumer, cubePackedLight, overlay, red, green, blue, alpha);
+                    for (BedrockBone part : this.children) {
+                        part.render(poseStack, consumer, cubePackedLight, overlay, red, green, blue, alpha);
+                    }
                 }
-
-                poseStack.popPose();
             }
         }
     }
