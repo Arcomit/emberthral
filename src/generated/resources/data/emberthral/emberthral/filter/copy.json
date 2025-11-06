@@ -1,0 +1,9 @@
+{
+  "beFilteredTabId": "minecraft:building_blocks",
+  "filterTagKey": "emberthral:copy_block",
+  "icon": {
+    "count": 1,
+    "id": "minecraft:stone"
+  },
+  "name": "emberthral.copy"
+}

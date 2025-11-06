@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:spawner",
+    {
+      "id": "nb:666",
+      "required": false
+    }
+  ]
+}

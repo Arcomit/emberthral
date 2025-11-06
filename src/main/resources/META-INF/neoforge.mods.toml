@@ -24,6 +24,9 @@ config="${mod_id}.core.obj.mixins.json"
 [[mixins]]
 config="${mod_id}.core.bedrock.v1.mixins.json"
 
+[[mixins]]
+config="${mod_id}.core.filter.mixin.json"
+
 [[dependencies."${mod_id}"]]
 modId = "neoforge"
 # 依赖项的类型。可以是“必需（required）”、“可选（optional）”、“不兼容（incompatible）”或“不鼓励（discouraged）”（不区分大小写）之一。

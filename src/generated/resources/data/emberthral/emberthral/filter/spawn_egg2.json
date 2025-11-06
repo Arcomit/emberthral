@@ -1,0 +1,9 @@
+{
+  "beFilteredTabId": "minecraft:spawn_eggs",
+  "filterTagKey": "emberthral:egg",
+  "icon": {
+    "count": 1,
+    "id": "minecraft:allay_spawn_egg"
+  },
+  "name": "emberthral.spawn_egg2"
+}

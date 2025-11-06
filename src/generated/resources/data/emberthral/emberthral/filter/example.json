@@ -1,0 +1,9 @@
+{
+  "beFilteredTabId": "minecraft:spawn_eggs",
+  "filterTagKey": "emberthral:example_items",
+  "icon": {
+    "count": 1,
+    "id": "minecraft:diamond"
+  },
+  "name": "emberthral.example"
+}
