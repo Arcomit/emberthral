@@ -19,11 +19,11 @@ public class EmberthralMod {
     public static final Logger LOGGER = LogManager.getLogger(MODID);
 
     public EmberthralMod(IEventBus modEventBus, ModContainer modContainer) {
-        LOGGER.debug("this is debug");
-        LOGGER.info("this is info");
-        LOGGER.warn("this is warn");
-        LOGGER.error("this is error");
-        LOGGER.fatal("this is fatal");
+//        LOGGER.debug("this is debug");
+//        LOGGER.info("this is info");
+//        LOGGER.warn("this is warn");
+//        LOGGER.error("this is error");
+//        LOGGER.fatal("this is fatal");
     }
 
     public static ResourceLocation prefix(String path){
