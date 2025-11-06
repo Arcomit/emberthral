@@ -23,14 +23,14 @@ import java.util.regex.Pattern;
 @OnlyIn(Dist.CLIENT)
 public class ObjReader {
 
-    private static final Pattern VERTEX_PATTERN        = Pattern.compile("(v( (-)?\\d+(\\.\\d+)?){3,4} *\\n)|(v( (-)?\\d+(\\.\\d+)?){3,4} *$)");
+    private static final Pattern VERTEX_PATTERN                    = Pattern.compile("(v( (-)?\\d+(\\.\\d+)?){3,4} *\\n)|(v( (-)?\\d+(\\.\\d+)?){3,4} *$)");
     private static final Pattern VERTEX_NORMAL_PATTERN = Pattern.compile("(vn( (-)?\\d+(\\.\\d+)?){3,4} *\\n)|(vn( (-)?\\d+(\\.\\d+)?){3,4} *$)");
-    private static final Pattern VERTEX_UV_PATTERN     = Pattern.compile("(vt( (-)?\\d+\\.\\d+){2,3} *\\n)|(vt( (-)?\\d+(\\.\\d+)?){2,3} *$)");
+    private static final Pattern VERTEX_UV_PATTERN             = Pattern.compile("(vt( (-)?\\d+\\.\\d+){2,3} *\\n)|(vt( (-)?\\d+(\\.\\d+)?){2,3} *$)");
 
     private static final Pattern FACE_VERTEX_UV_NORMAL_INDEX_PATTERN = Pattern.compile("(f( \\d+/\\d+/\\d+){3,4} *\\n)|(f( \\d+/\\d+/\\d+){3,4} *$)");
-    private static final Pattern FACE_VERTEX_UV_INDEX_PATTERN        = Pattern.compile("(f( \\d+/\\d+){3,4} *\\n)|(f( \\d+/\\d+){3,4} *$)");
-    private static final Pattern FACE_VERTEX_NORMAL_INDEX_PATTERN    = Pattern.compile("(f( \\d+//\\d+){3,4} *\\n)|(f( \\d+//\\d+){3,4} *$)");
-    private static final Pattern FACE_VERTEX_INDEX_PATTERN           = Pattern.compile("(f( \\d+){3,4} *\\n)|(f( \\d+){3,4} *$)");
+    private static final Pattern FACE_VERTEX_UV_INDEX_PATTERN                    = Pattern.compile("(f( \\d+/\\d+){3,4} *\\n)|(f( \\d+/\\d+){3,4} *$)");
+    private static final Pattern FACE_VERTEX_NORMAL_INDEX_PATTERN        = Pattern.compile("(f( \\d+//\\d+){3,4} *\\n)|(f( \\d+//\\d+){3,4} *$)");
+    private static final Pattern FACE_VERTEX_INDEX_PATTERN                           = Pattern.compile("(f( \\d+){3,4} *\\n)|(f( \\d+){3,4} *$)");
 
     /**
      * 根据Resource读取OBJ文件并解析其内容。
@@ -52,16 +52,16 @@ public class ObjReader {
         parse(Minecraft.getInstance().getResourceManager().open(resourceLocation));
     }
 
-    @Getter private final ObjModel             model        = new ObjModel   ();
-    private         final List<SimpleVector3f> positions    = new ArrayList<>();
-    private         final List<SimpleVector3f> normals      = new ArrayList<>();
-    private         final List<SimpleVector3f> uvs          = new ArrayList<>();
-    private               ObjGroup             currentGroup = model.getGroups().computeIfAbsent("Default", ObjGroup::new);
+    @Getter private final ObjModel                      model               = new ObjModel   ();
+    private                 final List<SimpleVector3f> positions          = new ArrayList<>();
+    private                 final List<SimpleVector3f> normals            = new ArrayList<>();
+    private                 final List<SimpleVector3f> uvs                    = new ArrayList<>();
+    private                          ObjGroup                       currentGroup = model.getGroups().computeIfAbsent("Default", ObjGroup::new);
 
     private void parse(InputStream inputStream) throws IOException, ModelParseException {
         BufferedReader reader  = new BufferedReader(new InputStreamReader(inputStream));
-        int            lineNum = 0;
-        String         currentLine;
+        int                         lineNum = 0;
+        String                   currentLine;
 
         while ((currentLine = reader.readLine()) != null) {
             lineNum++;
@@ -81,10 +81,10 @@ public class ObjReader {
         }
 
         switch (tokens[0]) {
-            case "v":  parsePosition(tokens, lineNum); break;
-            case "vt": parseUv      (tokens, lineNum); break;
-            case "vn": parseNormal  (tokens, lineNum); break;
-            case "f" : parseFace    (tokens, lineNum); break;
+            case "v":  parsePosition     (tokens, lineNum); break;
+            case "vt": parseUv              (tokens, lineNum); break;
+            case "vn": parseNormal     (tokens, lineNum); break;
+            case "f" : parseFace            (tokens, lineNum); break;
             case "g" :
             case "o" : startNewGroup(tokens, lineNum); break;
             default  :                                 break;
@@ -159,14 +159,14 @@ public class ObjReader {
         String[] subTokens;
         // f v1/vt1/vn1 v2/vt2/vn2 v3/vt3/vn3 ...
         if (FACE_VERTEX_UV_NORMAL_INDEX_PATTERN.matcher(String.join(" ", tokens)).matches()) {
-            face1.vertices      = new SimpleVector3f[tokens.length - 1];
-            face1.vertexUvs = new SimpleVector3f[tokens.length - 1];
+            face1.vertices              = new SimpleVector3f[tokens.length - 1];
+            face1.vertexUvs          = new SimpleVector3f[tokens.length - 1];
             face1.vertexNormals = new SimpleVector3f[tokens.length - 1];
 
             for (int i = 0; i < tokens.length - 1; ++i) {
-                subTokens              = tokens[i + 1].split("/");
-                face1.vertices     [i] = positions.get(Integer.parseInt(subTokens[0]) - 1);
-                face1.vertexUvs    [i] = uvs      .get(Integer.parseInt(subTokens[1]) - 1);
+                subTokens                       = tokens[i + 1].split("/");
+                face1.vertices             [i] = positions.get(Integer.parseInt(subTokens[0]) - 1);
+                face1.vertexUvs         [i] = uvs           .get(Integer.parseInt(subTokens[1]) - 1);
                 face1.vertexNormals[i] = normals  .get(Integer.parseInt(subTokens[2]) - 1);
             }
 
@@ -179,9 +179,9 @@ public class ObjReader {
             face1.vertexUvs = new SimpleVector3f[tokens.length - 1];
 
             for (int i = 0; i < tokens.length - 1; ++i) {
-                subTokens          = tokens[i + 1].split("/");
-                face1.vertices [i] = positions.get(Integer.parseInt(subTokens[0]) - 1);
-                face1.vertexUvs[i] = uvs      .get(Integer.parseInt(subTokens[1]) - 1);
+                subTokens              = tokens[i + 1].split("/");
+                face1.vertices    [i] = positions.get(Integer.parseInt(subTokens[0]) - 1);
+                face1.vertexUvs[i] = uvs           .get(Integer.parseInt(subTokens[1]) - 1);
             }
 
             face1.faceNormal = face1.computeUnitNormal();
@@ -193,8 +193,8 @@ public class ObjReader {
             face1.vertexNormals = new SimpleVector3f[tokens.length - 1];
 
             for (int i = 0; i < tokens.length - 1; ++i) {
-                subTokens              = tokens[i + 1].split("/");
-                face1.vertices     [i] = positions.get(Integer.parseInt(subTokens[0]) - 1);
+                subTokens                       = tokens[i + 1].split("/");
+                face1.vertices             [i] = positions.get(Integer.parseInt(subTokens[0]) - 1);
                 face1.vertexNormals[i] = normals  .get(Integer.parseInt(subTokens[1]) - 1);
             }
 
@@ -221,6 +221,6 @@ public class ObjReader {
 
     private void startNewGroup(String[] tokens, int lineNum) {
         String groupName    = tokens.length > 1 ? tokens[1] : "group_" + lineNum;
-               currentGroup = model.getGroups().computeIfAbsent(groupName, ObjGroup::new);
+               currentGroup      = model.getGroups().computeIfAbsent(groupName, ObjGroup::new);
     }
 }

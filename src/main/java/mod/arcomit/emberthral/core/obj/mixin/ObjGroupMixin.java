@@ -1,4 +1,4 @@
-package mod.arcomit.emberthral.core.obj.acceleratedrendering.mixin;
+package mod.arcomit.emberthral.core.obj.mixin;
 
 import com.github.argon4w.acceleratedrendering.core.CoreFeature;
 import com.github.argon4w.acceleratedrendering.core.buffers.accelerated.builders.IBufferGraph;
@@ -45,10 +45,10 @@ public class ObjGroupMixin implements IAcceleratedRenderer<Void> {
     @Shadow private float                    x;
     @Shadow private float                    y;
     @Shadow private float                    z;
-    @Shadow private Quaternionf              rotation = new Quaternionf();
-    @Shadow private float                    xScale   = 1;
-    @Shadow private float                    yScale   = 1;
-    @Shadow private float                    zScale   = 1;
+    @Shadow private Quaternionf      rotation = new Quaternionf();
+    @Shadow private float                    xScale    = 1;
+    @Shadow private float                    yScale    = 1;
+    @Shadow private float                    zScale    = 1;
 
     @Unique private final   Map<IBufferGraph, IMesh> meshes = new Object2ObjectOpenHashMap<>();
 

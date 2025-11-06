@@ -1,4 +1,4 @@
-package mod.arcomit.emberthral.core.obj.acceleratedrendering.mixin;
+package mod.arcomit.emberthral.core.bedrock.v1.mixin;
 
 import net.neoforged.fml.loading.LoadingModList;
 import org.objectweb.asm.tree.ClassNode;
@@ -10,10 +10,10 @@ import java.util.Set;
 
 /**
  * @Author: Arcomit
- * @CreateTime: 2025-10-14 15:20
+ * @CreateTime: 2025-11-06 15:37
  * @Description: TODO
  */
-public class ArMixinPlugin implements IMixinConfigPlugin {
+public class BedrockMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void onLoad(String mixinPackage) {}
@@ -25,7 +25,7 @@ public class ArMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        //判断是否有安装暮色森林
+        //判断是否有安装加速渲染
         return LoadingModList.get().getModFileById("acceleratedrendering") != null;
     }
 

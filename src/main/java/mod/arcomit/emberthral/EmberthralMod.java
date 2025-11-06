@@ -1,11 +1,11 @@
 package mod.arcomit.emberthral;
 
-import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @Author: Arcomit
@@ -16,13 +16,14 @@ import org.slf4j.Logger;
 public class EmberthralMod {
 
     public static final String MODID  = "emberthral";
-    public static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger(MODID);
 
     public EmberthralMod(IEventBus modEventBus, ModContainer modContainer) {
         LOGGER.debug("this is debug");
         LOGGER.info("this is info");
         LOGGER.warn("this is warn");
         LOGGER.error("this is error");
+        LOGGER.fatal("this is fatal");
     }
 
     public static ResourceLocation prefix(String path){

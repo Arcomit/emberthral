@@ -19,7 +19,10 @@ description = '''${mod_description}'''
 config = "${mod_id}.mixins.json"
 
 [[mixins]]
-config="${mod_id}.core.obj.acceleratedrendering.mixins.json"
+config="${mod_id}.core.obj.mixins.json"
+
+[[mixins]]
+config="${mod_id}.core.bedrock.v1.mixins.json"
 
 [[dependencies."${mod_id}"]]
 modId = "neoforge"
