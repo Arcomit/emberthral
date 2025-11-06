@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 /**
  * @Author: Arcomit
  * @CreateTime: 2025-08-25 11:40
- * @Description: TODO
+ * @Description:  字面意思，自动push，代码块结束时自动pop
  */
 public class PoseStackAutoCloser implements AutoCloseable {
 

@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * @Author: Arcomit
  * @CreateTime: 2025-11-06 15:37
- * @Description: TODO
+ * @Description: 基岩版模型渲染兼容加速渲染
  */
 @ExtensionMethod(VertexConsumerExtension.class)
 @Mixin(BedrockBone.class)

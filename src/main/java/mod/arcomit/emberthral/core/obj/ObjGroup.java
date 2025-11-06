@@ -25,39 +25,17 @@ public class ObjGroup {
     private final String        name;
     private final List<ObjFace> faces    = new ArrayList<>();
 
-    private       float         x;
-    private       float         y;
-    private       float         z;
-    private       Quaternionf   rotation = new Quaternionf();
-    private       float         xScale   = 1;
-    private       float         yScale   = 1;
-    private       float         zScale   = 1;
 
     public ObjGroup(String name) {
         this.name = name;
     }
 
     public void writeVertices(VertexConsumer vertexConsumer){
-        PoseStack poseStack = WriteVerticesInfo.getPoseStack();
-        try (PoseStackAutoCloser PSAC1 = PoseStackAutoCloser.pushMatrix(poseStack)) {
-            poseStack.translate(x / 16, y / 16, z / 16);
-            poseStack.mulPose(rotation);
-            poseStack.scale(xScale, yScale, zScale);
             for (ObjFace face : faces) {
 
                 face.writeVertices(vertexConsumer);
 
             }
-        }
     }
 
-    public void resetPose(){
-        x = 0;
-        y = 0;
-        z = 0;
-        rotation.identity();
-        xScale = 1;
-        yScale = 1;
-        zScale = 1;
-    }
 }

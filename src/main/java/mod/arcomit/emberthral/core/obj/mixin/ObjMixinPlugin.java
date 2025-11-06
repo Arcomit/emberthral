@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * @Author: Arcomit
  * @CreateTime: 2025-10-14 15:20
- * @Description: TODO
+ * @Description: Obj模型渲染的Mixin配置
  */
 public class ObjMixinPlugin implements IMixinConfigPlugin {
 

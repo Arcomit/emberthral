@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * @Author: Arcomit
  * @CreateTime: 2025-11-06 15:37
- * @Description: TODO
+ * @Description: 基岩版模型动画渲染的Mixin配置
  */
 public class BedrockMixinPlugin implements IMixinConfigPlugin {
 

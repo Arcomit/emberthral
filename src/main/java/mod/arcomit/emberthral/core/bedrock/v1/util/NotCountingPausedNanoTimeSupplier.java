@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @Author: Arcomit
  * @CreateTime: 2025-09-03 17:55
- * @Description: TODO
+ * @Description: 线程安全的不计算游戏暂停时间的纳秒时间供应器
  */
 @ThreadSafe
 public class NotCountingPausedNanoTimeSupplier implements LongSupplier {

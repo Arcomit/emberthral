@@ -13,12 +13,10 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import lombok.experimental.ExtensionMethod;
 import mod.arcomit.emberthral.core.obj.ObjFace;
 import mod.arcomit.emberthral.core.obj.ObjGroup;
-import mod.arcomit.emberthral.utils.PoseStackAutoCloser;
 import mod.arcomit.emberthral.core.obj.utils.WriteVerticesInfo;
 import net.minecraft.util.FastColor;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
-import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,21 +32,13 @@ import java.util.Map;
 /**
  * @Author: Arcomit
  * @CreateTime: 2025-08-07 12:58
- * @Description: TODO:未完成
+ * @Description: OBJ模型渲染兼容加速渲染
  */
 @ExtensionMethod(VertexConsumerExtension.class)
 @Mixin          (ObjGroup               .class)
 public class ObjGroupMixin implements IAcceleratedRenderer<Void> {
 
     @Shadow @Final  private List<ObjFace> faces;
-
-    @Shadow private float                    x;
-    @Shadow private float                    y;
-    @Shadow private float                    z;
-    @Shadow private Quaternionf      rotation = new Quaternionf();
-    @Shadow private float                    xScale    = 1;
-    @Shadow private float                    yScale    = 1;
-    @Shadow private float                    zScale    = 1;
 
     @Unique private final   Map<IBufferGraph, IMesh> meshes = new Object2ObjectOpenHashMap<>();
 
@@ -77,30 +67,24 @@ public class ObjGroupMixin implements IAcceleratedRenderer<Void> {
 
             PoseStack poseStack = WriteVerticesInfo.getPoseStack();
             if (poseStack == null) return;
-            try (PoseStackAutoCloser PSAC1 = PoseStackAutoCloser.pushMatrix(poseStack)) {
-                poseStack.translate(x / 16, y / 16, z / 16);
-                poseStack.mulPose(rotation);
-                poseStack.scale(xScale, yScale, zScale);
+            Color col = WriteVerticesInfo.getColor();
 
-                Color col = WriteVerticesInfo.getColor();
-
-                int color = FastColor.ARGB32.color
-                        (
-                                col.getAlpha(),
-                                col.getRed(),
-                                col.getGreen(),
-                                col.getBlue()
-                        );
-
-                if (faces.size() > 0) {
-                    extension.doRender(this, null,
-                            poseStack.last().pose(),
-                            poseStack.last().normal(),
-                            WriteVerticesInfo.getLightMap(),
-                            WriteVerticesInfo.getOverlayMap(),
-                            color
+            int color = FastColor.ARGB32.color
+                    (
+                            col.getAlpha (),
+                            col.getRed    (),
+                            col.getGreen(),
+                            col.getBlue   ()
                     );
-                }
+
+            if (faces.size() > 0) {
+                extension.doRender(this, null,
+                        poseStack.last().pose(),
+                        poseStack.last().normal(),
+                        WriteVerticesInfo.getLightMap(),
+                        WriteVerticesInfo.getOverlayMap(),
+                        color
+                );
             }
         }
 
