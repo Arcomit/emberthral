@@ -2,7 +2,6 @@ package mod.arcomit.emberthral.core.filter.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import mod.arcomit.emberthral.EmberthralMod;
 import mod.arcomit.emberthral.core.filter.Filter;
 import mod.arcomit.emberthral.core.filter.FilterManager;
 import net.minecraft.client.Minecraft;
@@ -25,8 +24,12 @@ public class FilterButton extends Button {
     private final int ID;
     // 当前按钮对应的过滤器
     private Filter currentFilter;
-    // 按钮贴图
-    private static final ResourceLocation BUTTON_TEXTURE = ResourceLocation.fromNamespaceAndPath(EmberthralMod.MODID, "textures/gui/slider.png");
+    // 未按下
+    private static final ResourceLocation BUTTON_SPRITE = ResourceLocation.withDefaultNamespace("widget/button");
+    private static final ResourceLocation BUTTON_HIGHLIGHTED_SPRITE = ResourceLocation.withDefaultNamespace("widget/button_highlighted");
+    // 按下
+    private static final ResourceLocation BUTTON_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("widget/button_disabled");
+    private static final ResourceLocation SLIDER_HIGHLIGHTED_SPRITE = ResourceLocation.withDefaultNamespace("widget/slider_highlighted");
 
     public FilterButton(int width, int height, int buttonID) {
         super(0, 0, width, height, Component.empty(), button -> {
@@ -80,7 +83,7 @@ public class FilterButton extends Button {
         this.renderString(guiGraphics, Minecraft.getInstance().font, this.getFGColor() | Mth.ceil(this.alpha * 255.0F) << 24);
 
         // 渲染物品图标(含阴影)
-        renderItemWithShadow(guiGraphics);
+        renderItem(guiGraphics);
 
         // 鼠标悬停时显示提示
         if (isHovered) {
@@ -94,33 +97,21 @@ public class FilterButton extends Button {
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
 
-        // 渲染按钮背景
-        guiGraphics.blit(BUTTON_TEXTURE,
-                this.getX(), this.getY(),
-                this.getWidth(), this.getHeight(),
-                20, 4, 200, 20,
-                0, getTextureY(isHovered)
-        );
+        guiGraphics.blitSprite(this.getSprite(), this.getX(), this.getY(), this.getWidth(), this.getHeight());
     }
 
-    //0-1按下，2-3未按下。
-    private int getTextureY(boolean isHovered) {
+    protected ResourceLocation getSprite() {
         return (currentFilter.isEnable()
-                ? (isHovered ? 1 : 0)
-                : (isHovered ? 3 : 2)) * 20;
+                ? (isHovered ? SLIDER_HIGHLIGHTED_SPRITE : BUTTON_DISABLED_SPRITE)
+                : (isHovered ? BUTTON_HIGHLIGHTED_SPRITE : BUTTON_SPRITE));
     }
 
-    private void renderItemWithShadow(GuiGraphics guiGraphics) {
+    private void renderItem(GuiGraphics guiGraphics) {
         final int ICON_SIZE = 16;
         final int POS_X = this.getX() + (this.width - ICON_SIZE) / 2;
-        final int POS_Y = this.getY() + (this.height - ICON_SIZE) / 2 - 1;
-
-        // 阴影渲染
-        guiGraphics.setColor(0.0F, 0.0F, 0.0F, 0.5F);
-        guiGraphics.renderItem(currentFilter.getIcon(), POS_X + 1, POS_Y + 1);
+        final int POS_Y = this.getY() + (this.height - ICON_SIZE) / 2;
 
         // 恢复颜色并渲染本体
-        guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         guiGraphics.renderItem(currentFilter.getIcon(), POS_X, POS_Y);
     }
 

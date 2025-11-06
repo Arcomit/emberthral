@@ -59,11 +59,11 @@ public class PageButton extends Button {
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
 
-        int u = isDown ? 83 : 115;
+        int u = isDown ? 82 : 114;
         int v = calculateVOffset();
 
         guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.alpha);
-        guiGraphics.blit(BUTTON_TEXTURE, getX(), getY(), u, v, 11, 10, 256, 256);
+        guiGraphics.blit(BUTTON_TEXTURE, getX(), getY(), u, v, this.getWidth(), this.getHeight(), 256, 256);
         guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
