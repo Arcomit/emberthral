@@ -1,3 +1,11 @@
 {
+  "filter.emberthral.example": "§aTest",
+  "filter.emberthral.spawn_egg": "§oSpawn Egg",
+  "filter.emberthral.egg": "§bYour Egg",
+  "filter.emberthral.copy": "§3Stone",
+  "filter.emberthral.test5": "§4Test5",
 
+  "filter.emberthral.tips.shift": "§eSingle Selection - While Holding §l§6Shift §eKey",
+  "filter.emberthral.tips.ctrl": "§eSelect All - While Holding §l§6Ctrl §eKey",
+  "filter.emberthral.tips.alt": "§eInvert Selection - While Holding §l§6Alt §eKey"
 }
